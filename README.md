@@ -1,12 +1,5 @@
-# Next Auth v5 - Advanced Guide (2024)
-
-![image](https://github.com/AntonioErdeljac/next-auth-v5-advanced-guide/assets/23248726/d0175397-8c3f-4e82-91c4-78c14f29bb81)
-
-This is a repository for Next Auth v5 - Advanced Guide (2024)
-
-[VIDEO TUTORIAL](https://youtu.be/1MTyCvS05V4)
-
 Key Features:
+
 - 🔐 Next-auth v5 (Auth.js)
 - 🚀 Next.js 14 with server actions
 - 🔑 Credentials Provider
@@ -58,7 +51,6 @@ npm i
 
 ### Setup .env file
 
-
 ```js
 DATABASE_URL=
 DIRECT_URL=
@@ -77,6 +69,7 @@ NEXT_PUBLIC_APP_URL=
 ```
 
 ### Setup Prisma
+
 ```shell
 npx prisma generate
 npx prisma db push
@@ -92,6 +85,6 @@ npm run dev
 
 Running commands with npm `npm run [command]`
 
-| command         | description                              |
-| :-------------- | :--------------------------------------- |
-| `dev`           | Starts a development instance of the app |
+| command | description                              |
+| :------ | :--------------------------------------- |
+| `dev`   | Starts a development instance of the app |
