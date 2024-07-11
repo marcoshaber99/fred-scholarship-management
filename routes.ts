@@ -1,35 +1,30 @@
-/**
- * An array of routes that are accessible to the public
- * These routes do not require authentication
- * @type {string[]}
- */
-export const publicRoutes = [
-  "/",
-  "/auth/new-verification"
-];
+// routes.ts
 
-/**
- * An array of routes that are used for authentication
- * These routes will redirect logged in users to /settings
- * @type {string[]}
- */
+export const publicRoutes = ["/", "/auth/new-verification"];
+
 export const authRoutes = [
   "/auth/login",
   "/auth/register",
   "/auth/error",
   "/auth/reset",
-  "/auth/new-password"
+  "/auth/new-password",
 ];
 
-/**
- * The prefix for API authentication routes
- * Routes that start with this prefix are used for API authentication purposes
- * @type {string}
- */
 export const apiAuthPrefix = "/api/auth";
 
-/**
- * The default redirect path after logging in
- * @type {string}
- */
-export const DEFAULT_LOGIN_REDIRECT = "/settings";
+export const DEFAULT_LOGIN_REDIRECT = "/dashboard";
+
+export const roleRoutes = {
+  STUDENT: "/student-dashboard",
+  ADMIN: "/admin-dashboard",
+  MANAGER: "/manager-dashboard",
+};
+
+export const protectedRoutes = [
+  "/dashboard",
+  "/student-dashboard",
+  "/admin-dashboard",
+  "/manager-dashboard",
+  "/settings",
+  "/pending-approval",
+];

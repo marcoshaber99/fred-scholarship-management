@@ -8,8 +8,9 @@ generator client {
 }
 
 enum UserRole {
+  STUDENT
   ADMIN
-  USER
+  MANAGER
 }
 
 model User {
@@ -19,7 +20,8 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  role          UserRole @default(USER)
+  role          UserRole @default(STUDENT)
+  isApproved    Boolean @default(false)
   accounts      Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?

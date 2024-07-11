@@ -1,5 +1,7 @@
-import { Poppins } from "next/font/google";
+// components/auth/header.tsx
 
+import Image from "next/image";
+import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 
 const font = Poppins({
@@ -9,22 +11,24 @@ const font = Poppins({
 
 interface HeaderProps {
   label: string;
-};
+}
 
-export const Header = ({
-  label,
-}: HeaderProps) => {
+export const Header = ({ label }: HeaderProps) => {
   return (
-    <div className="w-full flex flex-col gap-y-4 items-center justify-center">
-      <h1 className={cn(
-        "text-3xl font-semibold",
-        font.className,
-      )}>
-        🔐 Auth
-      </h1>
-      <p className="text-muted-foreground text-sm">
-        {label}
+    <div className="w-full flex flex-col items-center justify-center space-y-4">
+      <div className="flex items-center space-x-4">
+        <Image
+          src="/fu_logo.png"
+          alt="Frederick Sports Club Logo"
+          width={350}
+          height={350}
+          className="rounded-full"
+        />
+      </div>
+      <p className="text-slate-600 text-lg font-medium">
+        Scholarship Management Portal
       </p>
+      <p className="text-muted-foreground text-sm">{label}</p>
     </div>
   );
 };
