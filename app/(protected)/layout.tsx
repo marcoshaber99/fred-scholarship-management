@@ -1,18 +1,30 @@
+// app/(protected)/layout.tsx
+
+import { Sidebar } from "./_components/sidebar";
+import { TopBar } from "./_components/top-bar";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { currentUser } from "@/lib/auth";
 
-interface ProtectedLayoutProps {
+export default async function ProtectedLayout({
+  children,
+}: {
   children: React.ReactNode;
-}
+}) {
+  const session = await auth();
 
-const ProtectedLayout = async ({ children }: ProtectedLayoutProps) => {
-  const user = await currentUser();
-
-  if (!user) {
+  if (!session) {
     redirect("/auth/login");
   }
 
-  return <>{children}</>;
-};
-
-export default ProtectedLayout;
+  return (
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <TopBar />
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}

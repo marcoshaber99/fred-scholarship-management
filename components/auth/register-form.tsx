@@ -139,15 +139,9 @@ export const RegisterForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value={UserRole.STUDENT}>
-                        Student Athlete
-                      </SelectItem>
-                      <SelectItem value={UserRole.ADMIN}>
-                        Administrator
-                      </SelectItem>
-                      <SelectItem value={UserRole.MANAGER}>
-                        Coach/Manager
-                      </SelectItem>
+                      <SelectItem value={UserRole.STUDENT}>Student</SelectItem>
+                      <SelectItem value={UserRole.ADMIN}>Admin</SelectItem>
+                      <SelectItem value={UserRole.MANAGER}>Manager</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

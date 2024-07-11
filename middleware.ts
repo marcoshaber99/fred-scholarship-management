@@ -7,8 +7,6 @@ import {
   apiAuthPrefix,
   authRoutes,
   publicRoutes,
-  roleRoutes,
-  protectedRoutes,
 } from "@/routes";
 
 const { auth } = NextAuth(authConfig);
@@ -16,14 +14,10 @@ const { auth } = NextAuth(authConfig);
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
-  const user = req.auth?.user;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    nextUrl.pathname.startsWith(route)
-  );
 
   if (isApiAuthRoute) {
     return null;
@@ -45,19 +39,6 @@ export default auth((req) => {
     return Response.redirect(
       new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl)
     );
-  }
-
-  if (isLoggedIn && isProtectedRoute) {
-    if (user?.role && roleRoutes[user.role]) {
-      if (user.role === "ADMIN" || user.role === "MANAGER") {
-        if (!user.isApproved) {
-          return Response.redirect(new URL("/pending-approval", nextUrl));
-        }
-      }
-      if (!nextUrl.pathname.startsWith(roleRoutes[user.role])) {
-        return Response.redirect(new URL(roleRoutes[user.role], nextUrl));
-      }
-    }
   }
 
   return null;

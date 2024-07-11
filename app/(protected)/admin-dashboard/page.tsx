@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardLayout } from "../_components/dashboard-layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -75,62 +74,60 @@ const AdminDashboard = () => {
   }
 
   return (
-    <DashboardLayout>
-      <div className="space-y-6">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <Card>
-            <CardHeader>
-              <CardTitle>Total Users</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-semibold">1,234</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Active Scholarships</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-semibold">56</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Pending Approvals</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-semibold">{pendingUsers.length}</p>
-            </CardContent>
-          </Card>
-        </div>
+    <div className="space-y-6">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Card>
+          <CardHeader>
+            <CardTitle>Total Users</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-2xl font-semibold">1,234</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Active Scholarships</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-2xl font-semibold">56</p>
+          </CardContent>
+        </Card>
         <Card>
           <CardHeader>
             <CardTitle>Pending Approvals</CardTitle>
           </CardHeader>
           <CardContent>
-            {pendingUsers.length === 0 ? (
-              <p>No pending approvals at this time.</p>
-            ) : (
-              <ul className="space-y-2">
-                {pendingUsers.map((user) => (
-                  <li
-                    key={user.id}
-                    className="flex items-center justify-between border-b pb-2"
-                  >
-                    <span>
-                      {user.name} ({user.email}) - {user.role}
-                    </span>
-                    <Button onClick={() => approveUser(user.id)} size="sm">
-                      Approve
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <p className="text-2xl font-semibold">{pendingUsers.length}</p>
           </CardContent>
         </Card>
       </div>
-    </DashboardLayout>
+      <Card>
+        <CardHeader>
+          <CardTitle>Pending Approvals</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {pendingUsers.length === 0 ? (
+            <p>No pending approvals at this time.</p>
+          ) : (
+            <ul className="space-y-2">
+              {pendingUsers.map((user) => (
+                <li
+                  key={user.id}
+                  className="flex items-center justify-between border-b pb-2"
+                >
+                  <span>
+                    {user.name} ({user.email}) - {user.role}
+                  </span>
+                  <Button onClick={() => approveUser(user.id)} size="sm">
+                    Approve
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
