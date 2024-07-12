@@ -109,15 +109,18 @@ const AdminDashboard = () => {
           {pendingUsers.length === 0 ? (
             <p>No pending approvals at this time.</p>
           ) : (
-            <ul className="space-y-2">
+            <ul className="space-y-4">
               {pendingUsers.map((user) => (
                 <li
                   key={user.id}
-                  className="flex items-center justify-between border-b pb-2"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4"
                 >
-                  <span>
-                    {user.name} ({user.email}) - {user.role}
-                  </span>
+                  <div className="mb-2 sm:mb-0">
+                    <p className="font-medium">{user.name}</p>
+                    <p className="text-sm text-gray-600">
+                      {user.email} - {user.role}
+                    </p>
+                  </div>
                   <Button onClick={() => approveUser(user.id)} size="sm">
                     Approve
                   </Button>

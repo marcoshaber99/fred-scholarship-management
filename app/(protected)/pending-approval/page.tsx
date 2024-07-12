@@ -1,28 +1,37 @@
-// app/(protected)/pending-approval/page.tsx
+"use client";
 
-import { currentUser } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle } from "lucide-react";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { LoadingScreen } from "@/components/ui/loading-screen";
 
-const PendingApprovalPage = async () => {
-  const user = await currentUser();
+const PendingApprovalPage = () => {
+  const router = useRouter();
+  const user = useCurrentUser();
 
-  if (
-    !user ||
-    (user.role !== "ADMIN" && user.role !== "MANAGER") ||
-    user.isApproved
-  ) {
-    redirect("/");
+  useEffect(() => {
+    if (
+      !user ||
+      (user.role !== "ADMIN" && user.role !== "MANAGER") ||
+      user.isApproved
+    ) {
+      router.push("/");
+    }
+  }, [user, router]);
+
+  if (!user) {
+    return <LoadingScreen />;
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <h2 className="text-2xl font-bold">Account Pending Approval</h2>
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center space-x-2 text-amber-500">
-            <AlertTriangle />
+            <AlertTriangle className="h-5 w-5" />
             <span>Approval Status</span>
           </CardTitle>
         </CardHeader>

@@ -9,7 +9,7 @@ export const TopBar = () => {
   return (
     <header className="bg-white shadow-sm py-4 px-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-gray-900">
+        <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
           {user?.role === "STUDENT" && "Student Dashboard"}
           {user?.role === "ADMIN" && "Admin Dashboard"}
           {user?.role === "MANAGER" && "Manager Dashboard"}

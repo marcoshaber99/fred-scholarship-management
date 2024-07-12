@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition, useState } from "react";
 import { useSession } from "next-auth/react";
 import { UserRole } from "@prisma/client";
-
 import { Switch } from "@/components/ui/switch";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -61,7 +60,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <Card className="w-[600px]">
+    <Card className="w-full max-w-3xl mx-auto">
       <CardHeader>
         <h2 className="text-2xl font-semibold text-center">⚙️ Settings</h2>
       </CardHeader>
@@ -111,7 +110,7 @@ const SettingsPage = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>Current Password</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -170,8 +169,8 @@ const SettingsPage = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isPending} type="submit">
-              Save
+            <Button disabled={isPending} type="submit" className="w-full">
+              {isPending ? "Saving..." : "Save Changes"}
             </Button>
           </form>
         </Form>

@@ -1,17 +1,27 @@
-// app/(protected)/student-dashboard/page.tsx
-import { redirect } from "next/navigation";
-import { currentUser } from "@/lib/auth";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { LoadingScreen } from "@/components/ui/loading-screen";
 
-const StudentDashboard = async () => {
-  const user = await currentUser();
+const StudentDashboard = () => {
+  const router = useRouter();
+  const user = useCurrentUser();
 
-  if (!user || user.role !== "STUDENT") {
-    redirect("/");
+  useEffect(() => {
+    if (!user || user.role !== "STUDENT") {
+      router.push("/");
+    }
+  }, [user, router]);
+
+  if (!user) {
+    return <LoadingScreen />;
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <h2 className="text-2xl font-bold">Welcome, {user.name}!</h2>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card>
