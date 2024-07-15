@@ -18,7 +18,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex h-full flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
+    <main className="flex h-full flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-500 to-blue-800">
       <div className="space-y-6 text-center">
         <h1
           className={cn(
@@ -28,9 +28,7 @@ export default async function Home() {
         >
           🏆 Frederick Sports Scholarships
         </h1>
-        <p className="text-white text-lg">
-          Empowering athletes through education
-        </p>
+
         <div>
           <LoginButton asChild>
             <Button variant="secondary" size="lg">
