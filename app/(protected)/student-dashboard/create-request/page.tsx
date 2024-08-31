@@ -1,32 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import React from "react";
 
-const CreateRequestPage = () => {
+const CreateRequestPage: React.FC = () => {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Create New Scholarship Request</h2>
-      <form className="space-y-4">
-        <div>
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Request Title
-          </label>
-          <Input id="title" placeholder="Enter request title" />
-        </div>
-        <div>
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Description
-          </label>
-          <Textarea id="description" placeholder="Describe your request" />
-        </div>
-        <Button type="submit">Submit Request</Button>
-      </form>
+      <h1 className="text-2xl font-bold">Create New Scholarship Request</h1>
     </div>
   );
 };

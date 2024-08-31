@@ -8,6 +8,7 @@ import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { FaEnvelope, FaLock, FaShieldAlt } from "react-icons/fa";
 
 import { LoginSchema } from "@/schemas";
 import { Input } from "@/components/ui/input";
@@ -90,11 +91,15 @@ export const LoginForm = () => {
                   <FormItem>
                     <FormLabel>Two Factor Code</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="123456"
-                      />
+                      <div className="relative">
+                        <FaShieldAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="123456"
+                          className="pl-10"
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -110,12 +115,16 @@ export const LoginForm = () => {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          placeholder="john.doe@example.com"
-                          type="email"
-                        />
+                        <div className="relative">
+                          <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            placeholder="john.doe@example.com"
+                            type="email"
+                            className="pl-10"
+                          />
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -128,12 +137,16 @@ export const LoginForm = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          placeholder="******"
-                          type="password"
-                        />
+                        <div className="relative">
+                          <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            placeholder="******"
+                            type="password"
+                            className="pl-10"
+                          />
+                        </div>
                       </FormControl>
                       <Button
                         size="sm"

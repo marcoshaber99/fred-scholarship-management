@@ -31,6 +31,7 @@ import { FormSuccess } from "@/components/form-success";
 import { register } from "@/actions/register";
 import { Loader2 } from "lucide-react";
 import { UserRole } from "@prisma/client";
+import { FaEnvelope, FaLock, FaUser, FaUserTag } from "react-icons/fa";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -76,11 +77,15 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="John Doe"
-                    />
+                    <div className="relative">
+                      <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="John Doe"
+                        className="pl-10"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -93,12 +98,16 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="john.doe@example.com"
-                      type="email"
-                    />
+                    <div className="relative">
+                      <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="john.doe@example.com"
+                        type="email"
+                        className="pl-10"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -111,12 +120,16 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
+                    <div className="relative">
+                      <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="******"
+                        type="password"
+                        className="pl-10"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -134,9 +147,12 @@ export const RegisterForm = () => {
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your role" />
-                      </SelectTrigger>
+                      <div className="relative">
+                        <FaUserTag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 z-10" />
+                        <SelectTrigger className="pl-10">
+                          <SelectValue placeholder="Select your role" />
+                        </SelectTrigger>
+                      </div>
                     </FormControl>
                     <SelectContent>
                       <SelectItem value={UserRole.STUDENT}>Student</SelectItem>

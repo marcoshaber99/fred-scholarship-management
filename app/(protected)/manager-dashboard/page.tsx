@@ -31,32 +31,6 @@ const ManagerDashboard = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">Welcome, {user.name}!</h2>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>Active Applications</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-semibold">42</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Pending Reviews</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-semibold">15</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Approved Applications</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-semibold">27</p>
-          </CardContent>
-        </Card>
-      </div>
     </div>
   );
 };

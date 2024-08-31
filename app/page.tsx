@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -18,22 +19,27 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex h-full flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-500 to-blue-800">
+    <main className="flex h-full flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-gray-300">
       <div className="space-y-6 text-center">
+        <Image
+          src="/fu_logo.png"
+          alt="Frederick University Logo"
+          width={300}
+          height={300}
+          className="mx-auto mb-4"
+        />
         <h1
           className={cn(
-            "text-6xl font-semibold text-white drop-shadow-md",
+            "text-2xl font-semibold text-gray-800 drop-shadow-md",
             font.className
           )}
         >
-          🏆 Frederick Sports Scholarships
+          Scholarship Management
         </h1>
 
         <div>
           <LoginButton asChild>
-            <Button variant="secondary" size="lg">
-              Sign in
-            </Button>
+            <Button size="lg">Sign in</Button>
           </LoginButton>
         </div>
       </div>
