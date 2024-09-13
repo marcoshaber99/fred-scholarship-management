@@ -13,7 +13,14 @@ export const Header = ({ label }: HeaderProps) => {
           alt="Frederick Sports Club Logo"
           width={120}
           height={120}
-          className="rounded-full"
+          className="rounded-full dark:hidden"
+        />
+        <Image
+          src="/logo-dark.svg"
+          alt="Frederick Sports Club Logo"
+          width={120}
+          height={120}
+          className="rounded-full hidden dark:block"
         />
       </div>
       <p className="text-lg">Scholarship Management Portal</p>

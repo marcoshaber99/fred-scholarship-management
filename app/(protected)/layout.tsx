@@ -15,7 +15,7 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <div className="flex flex-col h-screen md:flex-row">
+    <div className="flex flex-col h-screen md:flex-row ">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
         <TopBar />
