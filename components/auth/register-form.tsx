@@ -78,12 +78,12 @@ export const RegisterForm = () => {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 " />
                       <Input
                         {...field}
                         disabled={isPending}
                         placeholder="John Doe"
-                        className="pl-10"
+                        className="pl-10  font-normal"
                       />
                     </div>
                   </FormControl>
@@ -99,13 +99,13 @@ export const RegisterForm = () => {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 " />
                       <Input
                         {...field}
                         disabled={isPending}
                         placeholder="john.doe@example.com"
                         type="email"
-                        className="pl-10"
+                        className="pl-10  font-normal"
                       />
                     </div>
                   </FormControl>
@@ -121,13 +121,13 @@ export const RegisterForm = () => {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 " />
                       <Input
                         {...field}
                         disabled={isPending}
                         placeholder="******"
                         type="password"
-                        className="pl-10"
+                        className="pl-10 font-normal"
                       />
                     </div>
                   </FormControl>
@@ -148,8 +148,8 @@ export const RegisterForm = () => {
                   >
                     <FormControl>
                       <div className="relative">
-                        <FaUserTag className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 z-10" />
-                        <SelectTrigger className="pl-10">
+                        <FaUserTag className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10" />
+                        <SelectTrigger className="pl-10 font-normal">
                           <SelectValue placeholder="Select your role" />
                         </SelectTrigger>
                       </div>

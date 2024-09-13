@@ -92,12 +92,12 @@ export const LoginForm = () => {
                     <FormLabel>Two Factor Code</FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <FaShieldAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                        <FaShieldAlt className="absolute left-3 top-1/2 transform -translate-y-1/2" />
                         <Input
                           {...field}
                           disabled={isPending}
                           placeholder="123456"
-                          className="pl-10"
+                          className="pl-10 font-normal"
                         />
                       </div>
                     </FormControl>
@@ -116,13 +116,13 @@ export const LoginForm = () => {
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                          <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 " />
                           <Input
                             {...field}
                             disabled={isPending}
                             placeholder="john.doe@example.com"
                             type="email"
-                            className="pl-10"
+                            className="pl-10 font-normal"
                           />
                         </div>
                       </FormControl>
@@ -138,13 +138,13 @@ export const LoginForm = () => {
                       <FormLabel>Password</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                          <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 " />
                           <Input
                             {...field}
                             disabled={isPending}
                             placeholder="******"
                             type="password"
-                            className="pl-10"
+                            className="pl-10 font-normal"
                           />
                         </div>
                       </FormControl>

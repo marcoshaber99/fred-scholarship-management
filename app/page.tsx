@@ -1,15 +1,8 @@
 import Image from "next/image";
-import { Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/auth/login-button";
 import { currentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
-
-const font = Poppins({
-  subsets: ["latin"],
-  weight: ["600"],
-});
 
 export default async function Home() {
   const user = await currentUser();
@@ -19,23 +12,16 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex h-full flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-gray-300">
+    <main className="flex h-screen items-center justify-center">
       <div className="space-y-6 text-center">
         <Image
-          src="/fu_logo.png"
+          src="/logo.svg"
           alt="Frederick University Logo"
-          width={300}
-          height={300}
+          width={100}
+          height={100}
           className="mx-auto mb-4"
         />
-        <h1
-          className={cn(
-            "text-2xl font-semibold text-gray-800 drop-shadow-md",
-            font.className
-          )}
-        >
-          Scholarship Management
-        </h1>
+        <h1 className="text-2xl font-semibold">Scholarship Management</h1>
 
         <div>
           <LoginButton asChild>
