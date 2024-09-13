@@ -38,12 +38,12 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({
       href={href}
       className={`flex items-center space-x-3 py-2 px-4 rounded-lg transition-all duration-200 ${
         isActive
-          ? "bg-blue-100 text-blue-700 font-medium"
-          : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+          ? "bg-primary/10 text-primary font-medium dark:bg-primary/20"
+          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
       }`}
     >
       <Icon className="h-5 w-5" />
-      <span className="text-sm">{children}</span>
+      <span className="text-sm font-normal">{children}</span>
     </Link>
   );
 };
@@ -66,27 +66,40 @@ export const Sidebar = () => {
       </Button>
 
       <aside
-        className={`bg-white shadow-lg fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out ${
+        className={`bg-background border-r dark:border-gray-800 fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:relative md:shadow-none`}
       >
         <div className="flex flex-col h-full">
-          <div className="p-4 border-b mt-2">
-            <Image
-              src="/fu_logo.png"
-              alt="Sports Scholarships Logo"
-              width={200}
-              height={50}
-              priority
-              className="mb-6"
-            />
-            <div className="flex items-center space-x-3 pl-3 bg-gray-50 rounded-lg">
-              <User className="h-5 w-5 text-gray-500" />
+          <div className="p-4 border-b dark:border-gray-800 mt-2">
+            <div className="flex items-center space-x-3 mb-4">
+              <Image
+                src="/logo-dark.svg"
+                alt="Frederick University Logo"
+                width={32}
+                height={32}
+                className="rounded-full hidden dark:block"
+              />
+              <Image
+                src="/logo.svg"
+                alt="Frederick University Logo"
+                width={32}
+                height={32}
+                className="rounded-full dark:hidden"
+              />
+              <h1 className="text-md font-bold text-primary">
+                Frederick University
+              </h1>
+            </div>
+            <div className="flex items-center space-x-3 pl-3 bg-accent rounded-lg">
+              <User className="h-5 w-5 text-muted-foreground" />
               <div>
-                <p className="text-sm font-medium text-gray-800">
+                <p className="text-sm font-medium text-foreground">
                   {user?.name || "User"}
                 </p>
-                <p className="text-xs text-gray-500">{user?.role || "Role"}</p>
+                <p className="text-xs text-muted-foreground">
+                  {user?.role || "Role"}
+                </p>
               </div>
             </div>
           </div>

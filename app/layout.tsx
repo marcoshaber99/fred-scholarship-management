@@ -4,8 +4,9 @@ import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/sonner";
 import { auth } from "@/auth";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Frederick Sports Scholarships",
@@ -20,12 +21,19 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <SessionProvider session={session}>
-          <Toaster />
-          {children}
-        </SessionProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SessionProvider session={session}>
+            <Toaster />
+            {children}
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

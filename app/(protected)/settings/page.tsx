@@ -62,7 +62,7 @@ const SettingsPage = () => {
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <CardHeader>
-        <h2 className="text-2xl font-semibold text-center">⚙️ Settings</h2>
+        <h2 className="text-2xl font-normal text-center">⚙️ Settings</h2>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -73,7 +73,7 @@ const SettingsPage = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel className="font-normal">Name</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -92,7 +92,7 @@ const SettingsPage = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="font-normal">Email</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -110,7 +110,9 @@ const SettingsPage = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Current Password</FormLabel>
+                        <FormLabel className="font-normal">
+                          Current Password
+                        </FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -128,7 +130,9 @@ const SettingsPage = () => {
                     name="newPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>New Password</FormLabel>
+                        <FormLabel className="font-normal">
+                          New Password
+                        </FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -150,7 +154,9 @@ const SettingsPage = () => {
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                       <div className="space-y-0.5">
-                        <FormLabel>Two Factor Authentication</FormLabel>
+                        <FormLabel className="font-normal">
+                          Two Factor Authentication
+                        </FormLabel>
                         <FormDescription>
                           Enable two factor authentication for your account
                         </FormDescription>
@@ -169,7 +175,11 @@ const SettingsPage = () => {
             </div>
             <FormError message={error} />
             <FormSuccess message={success} />
-            <Button disabled={isPending} type="submit" className="w-full">
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="w-full font-normal"
+            >
               {isPending ? "Saving..." : "Save Changes"}
             </Button>
           </form>

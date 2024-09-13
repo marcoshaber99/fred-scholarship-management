@@ -30,7 +30,9 @@ const ManagerDashboard = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Welcome, {user.name}!</h2>
+      <h2 className="text-2xl font-bold text-foreground dark:text-white">
+        Welcome, {user.name}!
+      </h2>
     </div>
   );
 };
