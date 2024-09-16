@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition, useState } from "react";
 import { useSession } from "next-auth/react";
-import { UserRole } from "@prisma/client";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,6 +23,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { SettingsSchema } from "@/schemas";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -157,7 +157,7 @@ const SettingsPage = () => {
                         <FormLabel className="font-normal">
                           Two Factor Authentication
                         </FormLabel>
-                        <FormDescription>
+                        <FormDescription className="font-normal">
                           Enable two factor authentication for your account
                         </FormDescription>
                       </div>
@@ -173,6 +173,12 @@ const SettingsPage = () => {
                 />
               )}
             </div>
+
+            <div className="flex items-center justify-between">
+              <FormLabel className="font-normal">Theme</FormLabel>
+              <ModeToggle />
+            </div>
+
             <FormError message={error} />
             <FormSuccess message={success} />
             <Button

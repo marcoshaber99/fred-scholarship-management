@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import {
   LayoutDashboard,
@@ -15,10 +15,12 @@ import {
   CheckCircle,
   Clock,
   User,
+  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LucideIcon } from "lucide-react";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
 
 interface SidebarLinkProps {
   href: string;
@@ -51,8 +53,14 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({
 export const Sidebar = () => {
   const user = useCurrentUser();
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const toggleSidebar = () => setIsOpen(!isOpen);
+
+  const handleLogout = async () => {
+    await signOut();
+    router.push("/auth/login");
+  };
 
   return (
     <>
@@ -68,11 +76,11 @@ export const Sidebar = () => {
       <aside
         className={`bg-background border-r dark:border-gray-800 fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 md:relative md:shadow-none`}
+        } md:translate-x-0 md:relative md:shadow-none flex flex-col`}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex-grow">
           <div className="p-4 border-b dark:border-gray-800 mt-2">
-            <div className="flex items-center space-x-3 mb-4">
+            <div className="flex items-center space-x-3 mb-4 md:mt-0 mt-8">
               <Image
                 src="/logo-dark.svg"
                 alt="Frederick University Logo"
@@ -104,7 +112,7 @@ export const Sidebar = () => {
             </div>
           </div>
 
-          <nav className="flex-grow mt-6 px-4 space-y-1 overflow-y-auto">
+          <nav className="mt-6 px-4 space-y-1 overflow-y-auto">
             {user?.role === "STUDENT" && (
               <>
                 <SidebarLink href="/student-dashboard" icon={LayoutDashboard}>
@@ -166,6 +174,17 @@ export const Sidebar = () => {
               Settings
             </SidebarLink>
           </nav>
+        </div>
+
+        <div className="p-4 border-t dark:border-gray-800">
+          <Button
+            variant="ghost"
+            className="w-full justify-start"
+            onClick={handleLogout}
+          >
+            <LogOut className="mr-2 h-4 w-4" />
+            Logout
+          </Button>
         </div>
       </aside>
     </>
