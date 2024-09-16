@@ -36,7 +36,7 @@ const PendingApprovalPage = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-lg">
+          <p className="text-lg font-normal">
             Your account is currently pending approval. An administrator will
             review your account shortly. Please check back later or contact
             support if you have any questions.
