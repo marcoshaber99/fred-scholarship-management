@@ -13,6 +13,23 @@ enum UserRole {
   MANAGER
 }
 
+enum Campus {
+  LIMASSOL
+  NICOSIA
+}
+
+enum StudyLevel {
+  UNDERGRADUATE
+  POSTGRADUATE
+}
+
+enum RequestStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -25,7 +42,7 @@ model User {
   accounts      Account[]
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
-
+  scholarshipRequests ScholarshipRequest[]
 }
 
 model Account {
@@ -81,4 +98,23 @@ model TwoFactorConfirmation {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model ScholarshipRequest {
+  id               String       @id @default(cuid())
+  userId           String
+  user             User         @relation(fields: [userId], references: [id])
+  name             String
+  surname          String
+  age              Int
+  campus           Campus
+  sport            String
+  registrationNumber String?
+  phoneNumber      String
+  studyLevel       StudyLevel
+  status           RequestStatus @default(DRAFT)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@unique([userId, status])
 }

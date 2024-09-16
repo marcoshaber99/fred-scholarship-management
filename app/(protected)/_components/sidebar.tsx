@@ -95,17 +95,17 @@ export const Sidebar = () => {
                 height={32}
                 className="rounded-full dark:hidden"
               />
-              <h1 className="text-md font-bold text-primary">
+              <h1 className="text-md font-normal text-primary">
                 Frederick University
               </h1>
             </div>
             <div className="flex items-center space-x-3 pl-3 bg-accent rounded-lg">
               <User className="h-5 w-5 text-muted-foreground" />
               <div>
-                <p className="text-sm font-medium text-foreground">
+                <p className="text-sm font-normal text-foreground">
                   {user?.name || "User"}
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs font-normal text-muted-foreground">
                   {user?.role || "Role"}
                 </p>
               </div>
@@ -117,12 +117,6 @@ export const Sidebar = () => {
               <>
                 <SidebarLink href="/student-dashboard" icon={LayoutDashboard}>
                   Dashboard
-                </SidebarLink>
-                <SidebarLink
-                  href="/student-dashboard/view-requests"
-                  icon={FileText}
-                >
-                  View Requests
                 </SidebarLink>
                 <SidebarLink
                   href="/student-dashboard/create-request"
@@ -179,7 +173,7 @@ export const Sidebar = () => {
         <div className="p-4 border-t dark:border-gray-800">
           <Button
             variant="ghost"
-            className="w-full justify-start"
+            className="w-full justify-start font-normal"
             onClick={handleLogout}
           >
             <LogOut className="mr-2 h-4 w-4" />
