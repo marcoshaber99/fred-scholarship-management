@@ -1,39 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardDescription,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { PlusCircle, Edit, Clock, CheckCircle, XCircle } from "lucide-react";
-
-interface ScholarshipRequest {
-  id: string;
-  status: "DRAFT" | "PENDING" | "APPROVED" | "REJECTED";
-  createdAt: string;
-  updatedAt: string;
-  // Add other fields as needed
-}
-
-const fetchScholarshipRequests = async (): Promise<ScholarshipRequest[]> => {
-  const response = await fetch("/api/scholarship-request");
-  if (!response.ok) {
-    throw new Error("Failed to fetch scholarship requests");
-  }
-  return response.json();
-};
+import { ScholarshipRequestDetails } from "./scholarship-request-details";
+import { ScholarshipRequest } from "@/types/scholarship";
+import { fetchScholarshipRequests } from "@/lib/api";
+import { Badge } from "@/components/ui/badge";
 
 const StudentDashboard = () => {
   const router = useRouter();
   const user = useCurrentUser();
+  const [selectedRequest, setSelectedRequest] =
+    useState<ScholarshipRequest | null>(null);
 
   const {
     data: scholarshipRequests,
@@ -45,85 +29,85 @@ const StudentDashboard = () => {
     enabled: !!user && user.role === "STUDENT",
   });
 
-  if (!user) {
-    return <LoadingScreen />;
-  }
-
+  if (!user) return <LoadingScreen />;
   if (user.role !== "STUDENT") {
     router.push("/");
     return null;
   }
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
-  if (error) {
+  if (isLoading) return <LoadingScreen />;
+  if (error)
     return (
       <div className="font-normal">
         Error loading scholarship requests. Please try again later.
       </div>
     );
-  }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "DRAFT":
-        return <Edit className="h-5 w-5 text-gray-500" />;
+        return <Edit className="h-5 w-5" />;
       case "PENDING":
-        return <Clock className="h-5 w-5 text-yellow-500" />;
+        return <Clock className="h-5 w-5" />;
       case "APPROVED":
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
+        return <CheckCircle className="h-5 w-5" />;
       case "REJECTED":
-        return <XCircle className="h-5 w-5 text-red-500" />;
+        return <XCircle className="h-5 w-5" />;
       default:
         return null;
     }
   };
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "DRAFT":
+        return "bg-gray-500";
+      case "PENDING":
+        return "bg-yellow-500";
+      case "APPROVED":
+        return "bg-green-500";
+      case "REJECTED":
+        return "bg-red-500";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-normal text-foreground dark:text-white">
-        Welcome, {user.name}!
-      </h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-semibold text-foreground dark:text-white">
+          Scholarship Requests
+        </h2>
+      </div>
 
       {scholarshipRequests && scholarshipRequests.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {scholarshipRequests.map((request) => (
-            <Card key={request.id} className="font-normal dark:bg-gray-800">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between font-normal">
-                  Scholarship Request
+            <Card
+              key={request.id}
+              className="hover:shadow-md transition-shadow duration-300 cursor-pointer font-normal"
+              onClick={() => setSelectedRequest(request)}
+            >
+              <CardHeader className="pb-2">
+                <div className="flex justify-between items-center">
+                  <Badge
+                    className={`${getStatusColor(request.status)} text-white`}
+                  >
+                    {request.status.charAt(0).toUpperCase() +
+                      request.status.slice(1).toLowerCase()}
+                  </Badge>
                   {getStatusIcon(request.status)}
-                </CardTitle>
-                <CardDescription className="font-normal">
-                  Status:{" "}
-                  {request.status.charAt(0).toUpperCase() +
-                    request.status.slice(1).toLowerCase()}
-                </CardDescription>
+                </div>
+                <CardTitle className="text-lg mt-2">{request.sport}</CardTitle>
               </CardHeader>
-              <CardContent className="font-normal">
-                <p>
+              <CardContent>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                  {request.name} {request.surname}
+                </p>
+                <p className="text-xs text-gray-500">
                   Created: {new Date(request.createdAt).toLocaleDateString()}
                 </p>
-                <p>
-                  Last Updated:{" "}
-                  {new Date(request.updatedAt).toLocaleDateString()}
-                </p>
               </CardContent>
-              <CardFooter>
-                {request.status === "DRAFT" && (
-                  <Button
-                    onClick={() =>
-                      router.push(
-                        `/student-dashboard/create-request?id=${request.id}`
-                      )
-                    }
-                  >
-                    Edit Draft
-                  </Button>
-                )}
-              </CardFooter>
             </Card>
           ))}
         </div>
@@ -131,26 +115,18 @@ const StudentDashboard = () => {
         <Card>
           <CardHeader>
             <CardTitle className="font-normal">
-              No Scholarship Requests
+              You haven't created any scholarship requests yet.{" "}
             </CardTitle>
-            <CardDescription className="font-normal">
-              You haven't created any scholarship requests yet.
-            </CardDescription>
           </CardHeader>
-          <CardContent className="font-normal">
-            <p>
-              Click the button below to create your first scholarship request.
-            </p>
-          </CardContent>
-          <CardFooter>
-            <Button
-              onClick={() => router.push("/student-dashboard/create-request")}
-            >
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Create Scholarship Request
-            </Button>
-          </CardFooter>
         </Card>
+      )}
+
+      {selectedRequest && (
+        <ScholarshipRequestDetails
+          request={selectedRequest}
+          isOpen={!!selectedRequest}
+          onClose={() => setSelectedRequest(null)}
+        />
       )}
     </div>
   );
