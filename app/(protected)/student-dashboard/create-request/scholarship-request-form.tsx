@@ -113,27 +113,6 @@ export function ScholarshipRequestForm() {
     return <LoadingScreen />;
   }
 
-  const pendingRequest = existingRequests?.find(
-    (req) => req.status === "PENDING"
-  );
-  if (pendingRequest && !requestId) {
-    return (
-      <div className="text-center">
-        <h2 className="text-xl font-normal mb-4">Existing Pending Request</h2>
-        <p className="font-normal">
-          You already have a pending scholarship request. You cannot create a
-          new request at this time.
-        </p>
-        <Button
-          className="mt-4"
-          onClick={() => router.push("/student-dashboard")}
-        >
-          Return to Dashboard
-        </Button>
-      </div>
-    );
-  }
-
   return (
     <Form {...form}>
       <form
