@@ -8,10 +8,10 @@ import { LoadingScreen } from "@/components/ui/loading-screen";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { PlusCircle, Edit, Clock, CheckCircle, XCircle } from "lucide-react";
-import { ScholarshipRequestDetails } from "./scholarship-request-details";
 import { ScholarshipRequest } from "@/types/scholarship";
 import { fetchScholarshipRequests } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
+import { ScholarshipRequestDetails } from "@/components/scholarship-request-details";
 
 const StudentDashboard = () => {
   const router = useRouter();
@@ -72,6 +72,14 @@ const StudentDashboard = () => {
     }
   };
 
+  const handleCardClick = (request: ScholarshipRequest) => {
+    if (request.status === "DRAFT") {
+      router.push(`/student-dashboard/create-request?id=${request.id}`);
+    } else {
+      setSelectedRequest(request);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -86,7 +94,7 @@ const StudentDashboard = () => {
             <Card
               key={request.id}
               className="hover:shadow-md transition-shadow duration-300 cursor-pointer font-normal"
-              onClick={() => setSelectedRequest(request)}
+              onClick={() => handleCardClick(request)}
             >
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-center">

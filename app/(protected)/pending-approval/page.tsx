@@ -32,7 +32,7 @@ const PendingApprovalPage = () => {
         <CardHeader>
           <CardTitle className="flex items-center space-x-2 text-amber-500">
             <AlertTriangle className="h-5 w-5" />
-            <span>Approval Status</span>
+            <span>Pending Approval</span>
           </CardTitle>
         </CardHeader>
         <CardContent>

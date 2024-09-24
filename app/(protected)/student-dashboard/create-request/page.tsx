@@ -1,21 +1,34 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ScholarshipRequestForm } from "./scholarship-request-form";
 import { LoadingScreen } from "@/components/ui/loading-screen";
 import { Button } from "@/components/ui/button";
-import { fetchScholarshipRequests } from "@/lib/api";
+import { fetchScholarshipRequests, fetchScholarshipRequest } from "@/lib/api";
 import { ScholarshipRequest } from "@/types/scholarship";
 
 const CreateRequestPage: React.FC = () => {
   const router = useRouter();
-  const { data: existingRequests, isLoading } = useQuery<ScholarshipRequest[]>({
+  const searchParams = useSearchParams();
+  const requestId = searchParams.get("id");
+
+  const { data: existingRequests, isLoading: isLoadingRequests } = useQuery<
+    ScholarshipRequest[]
+  >({
     queryKey: ["scholarshipRequests"],
     queryFn: fetchScholarshipRequests,
   });
 
-  if (isLoading) {
+  const { data: existingRequest, isLoading: isLoadingRequest } =
+    useQuery<ScholarshipRequest | null>({
+      queryKey: ["scholarshipRequest", requestId],
+      queryFn: () =>
+        requestId ? fetchScholarshipRequest(requestId) : Promise.resolve(null),
+      enabled: !!requestId,
+    });
+
+  if (isLoadingRequests || isLoadingRequest) {
     return <LoadingScreen />;
   }
 
@@ -23,7 +36,7 @@ const CreateRequestPage: React.FC = () => {
     (req) => req.status === "PENDING"
   );
 
-  if (pendingRequest) {
+  if (pendingRequest && !requestId) {
     return (
       <div className="text-center">
         <h2 className="text-xl font-normal mb-4">Existing Pending Request</h2>
@@ -43,8 +56,12 @@ const CreateRequestPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Create New Scholarship Request</h1>
-      <ScholarshipRequestForm />
+      <h1 className="text-2xl font-bold">
+        {requestId
+          ? "Edit Scholarship Request"
+          : "Create New Scholarship Request"}
+      </h1>
+      <ScholarshipRequestForm existingRequest={existingRequest} />
     </div>
   );
 };

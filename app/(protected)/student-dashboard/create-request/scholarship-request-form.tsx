@@ -34,7 +34,7 @@ import {
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   surname: z.string().min(2, "Surname must be at least 2 characters"),
-  age: z.coerce.number().int().positive().max(100),
+  age: z.coerce.number().int().positive().max(100), // Ensure age is coerced to a number
   campus: z.enum(["LIMASSOL", "NICOSIA"]),
   sport: z.string().min(2, "Sport must be at least 2 characters"),
   registrationNumber: z.string().optional(),
@@ -42,7 +42,13 @@ const formSchema = z.object({
   studyLevel: z.enum(["UNDERGRADUATE", "POSTGRADUATE"]),
 });
 
-export function ScholarshipRequestForm() {
+interface ScholarshipRequestFormProps {
+  existingRequest?: ScholarshipRequest | null;
+}
+
+export function ScholarshipRequestForm({
+  existingRequest,
+}: ScholarshipRequestFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const requestId = searchParams.get("id");
@@ -54,14 +60,6 @@ export function ScholarshipRequestForm() {
     queryKey: ["scholarshipRequests"],
     queryFn: fetchScholarshipRequests,
   });
-
-  const { data: existingRequest, isLoading: isLoadingRequest } =
-    useQuery<ScholarshipRequest | null>({
-      queryKey: ["scholarshipRequest", requestId],
-      queryFn: () =>
-        requestId ? fetchScholarshipRequest(requestId) : Promise.resolve(null),
-      enabled: !!requestId,
-    });
 
   const form = useForm<ScholarshipFormData>({
     resolver: zodResolver(formSchema),
@@ -106,10 +104,17 @@ export function ScholarshipRequestForm() {
       });
       return;
     }
-    mutation.mutate({ ...data, isDraft });
+
+    // Ensure age is coerced to a number
+    const serializedData = {
+      ...data,
+      age: Number(data.age),
+    };
+
+    mutation.mutate({ ...serializedData, isDraft });
   };
 
-  if (isLoadingRequests || isLoadingRequest) {
+  if (isLoadingRequests) {
     return <LoadingScreen />;
   }
 
