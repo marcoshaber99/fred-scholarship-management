@@ -40,8 +40,8 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({
       href={href}
       className={`flex items-center space-x-3 py-2 px-4 rounded-lg transition-all duration-200 ${
         isActive
-          ? "bg-primary/10 text-primary font-medium dark:bg-primary/20"
-          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+          ? "bg-blue-700/10 text-primary font-medium dark:bg-blue-600/20"
+          : "text-muted-foreground hover:bg-blue-700/10 hover:text-accent-foreground"
       }`}
     >
       <Icon className="h-5 w-5" />

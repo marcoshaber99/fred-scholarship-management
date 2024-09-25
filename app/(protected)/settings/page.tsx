@@ -184,7 +184,7 @@ const SettingsPage = () => {
             <Button
               disabled={isPending}
               type="submit"
-              className="w-full font-normal"
+              className="w-full font-semibold bg-blue-600 dark:text-white hover:bg-blue-700"
             >
               {isPending ? "Saving..." : "Save Changes"}
             </Button>

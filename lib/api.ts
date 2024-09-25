@@ -3,7 +3,7 @@ import { ScholarshipRequest, ScholarshipFormData } from "@/types/scholarship";
 export const fetchScholarshipRequests = async (): Promise<
   ScholarshipRequest[]
 > => {
-  const response = await fetch("/api/scholarship-request");
+  const response = await fetch("/api/scholarship-requests");
   if (!response.ok) {
     throw new Error("Failed to fetch scholarship requests");
   }
@@ -13,7 +13,7 @@ export const fetchScholarshipRequests = async (): Promise<
 export const fetchScholarshipRequest = async (
   id: string
 ): Promise<ScholarshipRequest> => {
-  const response = await fetch(`/api/scholarship-request/${id}`);
+  const response = await fetch(`/api/scholarship-requests/${id}`);
   if (!response.ok) {
     throw new Error("Failed to fetch scholarship request");
   }
